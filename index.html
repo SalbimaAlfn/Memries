@@ -201,14 +201,106 @@
       100% { transform: translateY(100vh) rotate(360deg); }
     }
 
-    /* Enhanced Polaroid Frame */
+    /* Filter Selection Styles */
+    .filter-selection {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+    
+    .filter-option {
+      width: 80px;
+      height: 80px;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5em;
+      background: white;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .filter-option:hover {
+      transform: scale(1.1);
+      border-color: #e84393;
+    }
+    
+    .filter-option.active {
+      border-color: #e84393;
+      box-shadow: 0 0 15px rgba(232, 67, 147, 0.5);
+    }
+    
+    .filter-preview {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2em;
+    }
+
+    /* Polaroid Frame Selection */
+    .polaroid-selection {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+    
+    .polaroid-option {
+      width: 100px;
+      height: 120px;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2em;
+      background: white;
+      overflow: hidden;
+      position: relative;
+      padding: 10px;
+    }
+    
+    .polaroid-option:hover {
+      transform: scale(1.05);
+      border-color: #e84393;
+    }
+    
+    .polaroid-option.active {
+      border-color: #e84393;
+      box-shadow: 0 0 15px rgba(232, 67, 147, 0.5);
+    }
+    
+    .polaroid-preview {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 0.8em;
+    }
+
+    /* Enhanced Polaroid Frames */
     .photo-container {
       position: relative;
       display: inline-block;
       margin: 20px 0;
     }
     
-    .frame-polaroid {
+    /* Classic Polaroid Frame */
+    .frame-classic {
       background: white;
       padding: 15px 15px 70px 15px;
       border: 1px solid #ddd;
@@ -219,11 +311,71 @@
       margin: 0 auto;
     }
     
+    /* Floral Polaroid Frame */
+    .frame-floral {
+      background: linear-gradient(135deg, #fff0f5, #f8f8ff);
+      padding: 20px 20px 80px 20px;
+      border: 2px solid #ff9ff3;
+      box-shadow: 0 10px 30px rgba(255,159,243,0.2);
+      border-radius: 8px;
+      position: relative;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    
+    .frame-floral::before {
+      content: '🌸🌺💐';
+      position: absolute;
+      top: -15px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 1.5em;
+      color: #ff6b9d;
+    }
+    
+    /* Party Polaroid Frame */
+    .frame-party {
+      background: linear-gradient(45deg, #ffeaa7, #fd79a8, #74b9ff);
+      padding: 18px 18px 75px 18px;
+      border: 3px dashed #ffffff;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+      border-radius: 5px;
+      position: relative;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    
+    .frame-party::before {
+      content: '🎉🎊✨';
+      position: absolute;
+      top: -20px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 1.8em;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+    
     .frame-image {
       width: 100%;
       height: auto;
       display: block;
       border-radius: 2px;
+      transition: filter 0.3s ease;
+    }
+    
+    /* Filter Effects */
+    .filter-warm {
+      filter: sepia(0.3) brightness(1.1) contrast(1.1);
+    }
+    
+    .filter-vintage {
+      filter: sepia(0.5) hue-rotate(-10deg) brightness(1.05) contrast(0.9);
+    }
+    
+    .filter-bright {
+      filter: brightness(1.2) saturate(1.3) contrast(1.1);
     }
     
     .polaroid-text {
@@ -236,6 +388,19 @@
       font-size: 16px;
       color: #666;
       letter-spacing: 2px;
+    }
+    
+    .frame-floral .polaroid-text {
+      color: #e84393;
+      font-weight: bold;
+      font-family: 'Comic Sans MS', cursive;
+    }
+    
+    .frame-party .polaroid-text {
+      color: white;
+      font-weight: bold;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+      font-family: 'Arial Black', sans-serif;
     }
     
     /* Mini decorations */
@@ -493,16 +658,51 @@
         </button>
         <audio id="birthdayMusic" loop>
           <!-- Replace with your music file path -->
-          <source src="boy pablo - honey.mp3" type="audio/mp3">
+          <source src="your-music-file.mp3" type="audio/mp3">
           Your browser does not support the audio element.
         </audio>
+      </div>
+    </div>
+
+    <!-- Filter Selection -->
+    <div id="filter-selection" class="filter-selection" style="display: none;">
+      <div class="filter-option active" onclick="selectFilter('normal')" data-filter="normal">
+        <div class="filter-preview">📷<br><small>Normal</small></div>
+      </div>
+      <div class="filter-option" onclick="selectFilter('warm')" data-filter="warm">
+        <div class="filter-preview" style="background: #fff8f0;">🌞<br><small>Warm</small></div>
+      </div>
+      <div class="filter-option" onclick="selectFilter('vintage')" data-filter="vintage">
+        <div class="filter-preview" style="background: #f5f0e6;">📜<br><small>Vintage</small></div>
+      </div>
+      <div class="filter-option" onclick="selectFilter('bright')" data-filter="bright">
+        <div class="filter-preview" style="background: #f0f8ff;">✨<br><small>Bright</small></div>
+      </div>
+    </div>
+
+    <!-- Polaroid Style Selection -->
+    <div id="polaroid-selection" class="polaroid-selection" style="display: none;">
+      <div class="polaroid-option active" onclick="selectPolaroid('classic')" data-polaroid="classic">
+        <div class="polaroid-preview" style="background: white; border: 1px solid #ddd;">
+          📸<br>Classic<br><small>Happy Birthday Ulya</small>
+        </div>
+      </div>
+      <div class="polaroid-option" onclick="selectPolaroid('floral')" data-polaroid="floral">
+        <div class="polaroid-preview" style="background: linear-gradient(135deg, #fff0f5, #f8f8ff); border: 2px solid #ff9ff3;">
+          🌸<br>Floral<br><small>Happy Birthday Ulya</small>
+        </div>
+      </div>
+      <div class="polaroid-option" onclick="selectPolaroid('party')" data-polaroid="party">
+        <div class="polaroid-preview" style="background: linear-gradient(45deg, #ffeaa7, #fd79a8, #74b9ff); border: 2px dashed white; color: white;">
+          🎉<br>Party<br><small>Happy Birthday Ulya</small>
+        </div>
       </div>
     </div>
 
     <!-- Photo Result with Enhanced Polaroid Frame -->
     <div id="photo-result" style="display: none;">
       <div class="photo-container">
-        <div class="frame-polaroid">
+        <div id="photo-frame" class="frame-classic">
           <!-- Mini decorations -->
           <div class="mini-decoration flower">🌼</div>
           <div class="mini-decoration cactus">🌵</div>
@@ -510,7 +710,7 @@
           <div class="mini-decoration flower">🌷</div>
           
           <img id="captured-image" class="frame-image" alt="Captured Photo" />
-          <div class="polaroid-text">Happy Birthday Ulyafihana ♥</div>
+          <div class="polaroid-text">Happy Birthday Ulya</div>
         </div>
       </div>
       <button id="download-btn" onclick="downloadPhoto()">Download Photo</button>
@@ -521,12 +721,8 @@
       <h3>Birthday Wishes</h3>
       <p>May your day be as bright as your smile and as wonderful as you are. Every moment with you is a treasure, and today we celebrate the amazing person you've become.</p>
       
-      <h3>Message</h3>
-      <p>I hope your day is peaceful, full of love, and surrounded by people who care about you. You deserve a soft, happy year ahead — the kind that lets you grow, glow, and feel proud of yourself.
-
-You’re genuinely such a sweet person, and I’m grateful for the little moments and conversations we share. I hope you keep being yourself, because that version of you is already wonderful.
-
-Wishing you the happiest birthday ever. </p>
+      <h3>Special Memories</h3>
+      <p>Remember all the beautiful moments we've shared together? From laughter-filled days to quiet evenings, each memory with you is precious. Here's to creating many more wonderful memories together!</p>
       
       <h3>Looking Forward</h3>
       <p>As you celebrate another year, may you continue to grow, dream, and achieve all that your heart desires. The future holds endless possibilities for someone as special as you.</p>
@@ -546,6 +742,8 @@ Wishing you the happiest birthday ever. </p>
     let capturedImageData = null;
     let currentQuoteIndex = 0;
     let isMusicPlaying = false;
+    let currentFilter = 'normal';
+    let currentPolaroid = 'classic';
     
     // Array of quotes
     const quotes = [
@@ -575,14 +773,6 @@ Wishing you the happiest birthday ever. </p>
       },
       {
         text: "Your birthday is the first day of another 365-day journey. Be the shining thread in the beautiful tapestry of the world.",
-        author: "Anonymous"
-      },
-      {
-        text: "Don't forget to be happy!!, don't be sad and always smile :).",
-        author: "Anonymous"
-      },
-      {
-        text: "Have a great day on your everyday that you working on!.",
         author: "Anonymous"
       }
     ];
@@ -620,6 +810,50 @@ Wishing you the happiest birthday ever. </p>
         quoteText.style.opacity = 1;
         quoteAuthor.style.opacity = 1;
       }, 300);
+    }
+    
+    function selectFilter(filterType) {
+      currentFilter = filterType;
+      
+      // Update active filter option
+      document.querySelectorAll('.filter-option').forEach(option => {
+        option.classList.remove('active');
+      });
+      document.querySelector(`[data-filter="${filterType}"]`).classList.add('active');
+      
+      // Update filter display if photo exists
+      if (capturedImageData) {
+        updateFilter();
+      }
+    }
+    
+    function selectPolaroid(polaroidType) {
+      currentPolaroid = polaroidType;
+      
+      // Update active polaroid option
+      document.querySelectorAll('.polaroid-option').forEach(option => {
+        option.classList.remove('active');
+      });
+      document.querySelector(`[data-polaroid="${polaroidType}"]`).classList.add('active');
+      
+      // Update polaroid display if photo exists
+      if (capturedImageData) {
+        updatePolaroid();
+      }
+    }
+    
+    function updateFilter() {
+      const capturedImage = document.getElementById('captured-image');
+      capturedImage.className = 'frame-image';
+      
+      if (currentFilter !== 'normal') {
+        capturedImage.classList.add(`filter-${currentFilter}`);
+      }
+    }
+    
+    function updatePolaroid() {
+      const photoFrame = document.getElementById('photo-frame');
+      photoFrame.className = `frame-${currentPolaroid}`;
     }
     
     function toggleMusic() {
@@ -678,6 +912,10 @@ Wishing you the happiest birthday ever. </p>
         });
         video.srcObject = stream;
         overlay.style.display = 'flex';
+        
+        // Show filter and polaroid selections
+        document.getElementById('filter-selection').style.display = 'flex';
+        document.getElementById('polaroid-selection').style.display = 'flex';
       } catch (error) {
         alert('Camera access denied or not available. Please allow camera permissions.');
       }
@@ -704,6 +942,8 @@ Wishing you the happiest birthday ever. </p>
       const photoResult = document.getElementById('photo-result');
 
       capturedImage.src = capturedImageData;
+      updateFilter();
+      updatePolaroid();
       
       // Show results
       photoResult.style.display = 'block';
@@ -730,57 +970,139 @@ Wishing you the happiest birthday ever. </p>
         const ctx = canvas.getContext('2d');
         
         // Calculate dimensions with frame
-        const framePadding = 60; // Extra space for frame
+        const framePadding = 60;
         canvas.width = originalImg.width + framePadding * 2;
-        canvas.height = originalImg.height + framePadding * 2 + 50; // Extra space for text
+        canvas.height = originalImg.height + framePadding * 2 + 50;
         
-        // Draw white background for polaroid
-        ctx.fillStyle = '#ffffff';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        // Draw background based on polaroid style
+        drawPolaroidBackground(ctx, canvas.width, canvas.height);
         
-        // Draw the original image
+        // Draw the original image with filter
         const imgX = framePadding;
         const imgY = framePadding;
         const imgWidth = originalImg.width;
         const imgHeight = originalImg.height;
         
+        // Apply filter to the image
+        ctx.save();
+        applyFilterToContext(ctx);
         ctx.drawImage(originalImg, imgX, imgY, imgWidth, imgHeight);
-        
-        // Add polaroid frame border
-        ctx.strokeStyle = '#e0e0e0';
-        ctx.lineWidth = 1;
-        ctx.strokeRect(imgX - 1, imgY - 1, imgWidth + 2, imgHeight + 2);
+        ctx.restore();
         
         // Add polaroid text
-        ctx.font = '18px "Courier New", monospace';
-        ctx.fillStyle = '#666666';
-        ctx.textAlign = 'center';
-        ctx.fillText('Happy Birthday Ulyafihana ♥', canvas.width / 2, imgY + imgHeight + 35);
+        drawPolaroidText(ctx, canvas.width, imgY + imgHeight + 35);
         
         // Add mini decorations
-        ctx.font = '28px Arial';
-        
-        // Top left flower
-        ctx.fillText('🌼', imgX + 20, imgY - 15);
-        
-        // Top right cactus
-        ctx.fillText('🌵', imgX + imgWidth - 25, imgY - 15);
-        
-        // Bottom left book
-        ctx.fillText('📖', imgX + 20, imgY + imgHeight + 15);
-        
-        // Bottom right flower
-        ctx.fillText('🌷', imgX + imgWidth - 25, imgY + imgHeight + 15);
+        drawMiniDecorations(ctx, imgX, imgY, imgWidth, imgHeight);
         
         // Create download link
         const link = document.createElement('a');
         link.href = canvas.toDataURL('image/png');
-        link.download = 'birthday-memory.png';
+        link.download = `birthday-memory-${currentPolaroid}.png`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
       };
       originalImg.src = capturedImageData;
+    }
+    
+    function drawPolaroidBackground(ctx, width, height) {
+      switch(currentPolaroid) {
+        case 'classic':
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, width, height);
+          break;
+        case 'floral':
+          const gradient1 = ctx.createLinearGradient(0, 0, width, height);
+          gradient1.addColorStop(0, '#fff0f5');
+          gradient1.addColorStop(1, '#f8f8ff');
+          ctx.fillStyle = gradient1;
+          ctx.fillRect(0, 0, width, height);
+          
+          // Add floral decoration at top
+          ctx.font = '24px Arial';
+          ctx.fillStyle = '#ff6b9d';
+          ctx.textAlign = 'center';
+          ctx.fillText('🌸🌺💐', width / 2, 25);
+          break;
+        case 'party':
+          const gradient2 = ctx.createLinearGradient(0, 0, width, height);
+          gradient2.addColorStop(0, '#ffeaa7');
+          gradient2.addColorStop(0.5, '#fd79a8');
+          gradient2.addColorStop(1, '#74b9ff');
+          ctx.fillStyle = gradient2;
+          ctx.fillRect(0, 0, width, height);
+          
+          // Add party decoration at top
+          ctx.font = '28px Arial';
+          ctx.fillStyle = 'white';
+          ctx.textAlign = 'center';
+          ctx.fillText('🎉🎊✨', width / 2, 30);
+          break;
+      }
+    }
+    
+    function applyFilterToContext(ctx) {
+      switch(currentFilter) {
+        case 'warm':
+          ctx.filter = 'sepia(0.3) brightness(1.1) contrast(1.1)';
+          break;
+        case 'vintage':
+          ctx.filter = 'sepia(0.5) hue-rotate(-10deg) brightness(1.05) contrast(0.9)';
+          break;
+        case 'bright':
+          ctx.filter = 'brightness(1.2) saturate(1.3) contrast(1.1)';
+          break;
+        default:
+          ctx.filter = 'none';
+      }
+    }
+    
+    function drawPolaroidText(ctx, width, textY) {
+      ctx.font = '18px "Courier New", monospace';
+      ctx.textAlign = 'center';
+      
+      switch(currentPolaroid) {
+        case 'classic':
+          ctx.fillStyle = '#666666';
+          break;
+        case 'floral':
+          ctx.font = 'bold 18px "Comic Sans MS", cursive';
+          ctx.fillStyle = '#e84393';
+          break;
+        case 'party':
+          ctx.font = 'bold 18px "Arial Black", sans-serif';
+          ctx.fillStyle = 'white';
+          ctx.shadowColor = 'rgba(0,0,0,0.5)';
+          ctx.shadowBlur = 3;
+          ctx.shadowOffsetX = 1;
+          ctx.shadowOffsetY = 1;
+          break;
+      }
+      
+      ctx.fillText('Happy Birthday Ulya', width / 2, textY);
+      
+      // Reset shadow if applied
+      ctx.shadowColor = 'transparent';
+      ctx.shadowBlur = 0;
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = 0;
+    }
+    
+    function drawMiniDecorations(ctx, x, y, width, height) {
+      ctx.font = '28px Arial';
+      
+      // Top left flower
+      ctx.fillText('🌼', x + 20, y - 15);
+      
+      // Top right cactus
+      ctx.fillText('🌵', x + width - 25, y - 15);
+      
+      // Bottom left book
+      ctx.fillText('📖', x + 20, y + height + 15);
+      
+      // Bottom right flower
+      ctx.fillText('🌷', x + width - 25, y + height + 15);
     }
     
     // Add click event to quote container to change quotes
