@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happy Birthday Ulyafihana</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 50%, #fd79a8 100%);
+      color: #000000;
+      text-align: center;
+      padding: 50px 20px;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      position: relative;
+    }
+    /* Subtle dotted pattern overlay */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+      background-size: 20px 20px;
+      pointer-events: none;
+    }
+    .card {
+      background: #f8f8f8;
+      border: 2px solid #ffb3ba;
+      border-radius: 12px;
+      padding: 40px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.5);
+      opacity: 0;
+      animation: fadeIn 1s ease-in-out forwards, glow 2s ease-in-out infinite alternate;
+      position: relative;
+      z-index: 1;
+      margin: 20px 0;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      border: 1px solid #cccccc;
+      border-radius: 10px;
+      pointer-events: none;
+    }
+    /* Ribbon-like top border */
+    .card::after {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 20px;
+      background: linear-gradient(90deg, #ff9ff3, #54a0ff);
+      border-radius: 10px 10px 0 0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    @keyframes glow {
+      from { box-shadow: 0 4px 20px rgba(255,179,186,0.5); }
+      to { box-shadow: 0 4px 20px rgba(255,179,186,0.8); }
+    }
+    h1 {
+      font-size: 2.5em;
+      font-weight: 300;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+      color: #e84393;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+    .icon {
+      font-size: 3em;
+      margin-bottom: 20px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+    p {
+      font-size: 1.2em;
+      line-height: 1.6;
+      margin-bottom: 30px;
+      color: #636e72;
+    }
+    button {
+      background: linear-gradient(45deg, #000000, #333333);
+      color: #ffffff;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1em;
+      font-weight: 300;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+      margin: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    button:hover {
+      background: linear-gradient(45deg, #444444, #666666);
+      transform: scale(1.05);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+    .hidden-message {
+      display: none;
+      margin-top: 20px;
+      font-style: italic;
+      animation: fadeIn 1s ease-in-out;
+      color: #fd79a8;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 10px;
+      border-left: 4px solid #fd79a8;
+    }
+    .quote-container {
+      margin-bottom: 25px;
+      position: relative;
+    }
+    .quote {
+      font-size: 1.3em;
+      line-height: 1.6;
+      color: #2d3436;
+      font-style: italic;
+      margin-bottom: 15px;
+      padding: 0 10px;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .quote-author {
+      font-size: 1em;
+      color: #e84393;
+      font-weight: 500;
+      margin-top: 10px;
+    }
+    .quote-icon {
+      position: absolute;
+      font-size: 2em;
+      opacity: 0.2;
+    }
+    .quote-icon.left {
+      top: 0;
+      left: 0;
+    }
+    .quote-icon.right {
+      bottom: 0;
+      right: 0;
+    }
+    .dot {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #000000;
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+    /* New floating decorations: balloons, hearts, stars */
+    .decoration {
+      position: absolute;
+      font-size: 2em;
+      opacity: 0.7;
+      animation: float 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .balloon { color: #e17055; }
+    .heart { color: #fd79a8; }
+    .star { color: #ffeaa7; }
+    /* Confetti animation */
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #ff7675;
+      border-radius: 50%;
+      animation: fall 5s linear infinite;
+      opacity: 0.8;
+    }
+    @keyframes fall {
+      0% { transform: translateY(-100vh) rotate(0deg); }
+      100% { transform: translateY(100vh) rotate(360deg); }
+    }
+
+    /* Enhanced Polaroid Frame */
+    .photo-container {
+      position: relative;
+      display: inline-block;
+      margin: 20px 0;
+    }
+    
+    .frame-polaroid {
+      background: white;
+      padding: 15px 15px 70px 15px;
+      border: 1px solid #ddd;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      border-radius: 3px;
+      position: relative;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    
+    .frame-image {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 2px;
+    }
+    
+    .polaroid-text {
+      position: absolute;
+      bottom: 25px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-family: 'Courier New', monospace;
+      font-size: 16px;
+      color: #666;
+      letter-spacing: 2px;
+    }
+    
+    /* Mini decorations */
+    .mini-decoration {
+      position: absolute;
+      font-size: 24px;
+      z-index: 2;
+      filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.2));
+      animation: gentle-bounce 3s ease-in-out infinite;
+    }
+    
+    @keyframes gentle-bounce {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-5px) rotate(5deg); }
+    }
+    
+    .flower {
+      color: #ff6b8b;
+    }
+    
+    .cactus {
+      color: #2ecc71;
+    }
+    
+    .book {
+      color: #8b4513;
+    }
+    
+    .mini-decoration:nth-child(1) { top: 10px; left: 10px; animation-delay: 0s; }
+    .mini-decoration:nth-child(2) { top: 10px; right: 10px; animation-delay: 0.5s; }
+    .mini-decoration:nth-child(3) { bottom: 60px; left: 15px; animation-delay: 1s; }
+    .mini-decoration:nth-child(4) { bottom: 60px; right: 15px; animation-delay: 1.5s; }
+
+    /* Music Player Styles */
+    .music-player {
+      margin-top: 25px;
+      padding: 20px;
+      background: linear-gradient(135deg, #ff9ff3, #54a0ff);
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .music-player::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="music" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="2" fill="rgba(255,255,255,0.2)"/></pattern></defs><rect width="100" height="100" fill="url(%23music)"/></svg>');
+      opacity: 0.3;
+    }
+    
+    .music-title {
+      font-size: 1.1em;
+      color: white;
+      margin-bottom: 15px;
+      font-weight: 500;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+      position: relative;
+      z-index: 1;
+    }
+    
+    .play-button {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffffff, #f0f0f0);
+      border: none;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2), 
+                  inset 0 2px 5px rgba(255,255,255,0.8),
+                  inset 0 -2px 5px rgba(0,0,0,0.1);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: #e84393;
+      transition: all 0.3s ease;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      animation: pulse-glow 2s infinite;
+    }
+    
+    @keyframes pulse-glow {
+      0%, 100% { 
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2), 
+                    inset 0 2px 5px rgba(255,255,255,0.8),
+                    inset 0 -2px 5px rgba(0,0,0,0.1);
+      }
+      50% { 
+        box-shadow: 0 5px 20px rgba(232, 67, 147, 0.4), 
+                    inset 0 2px 5px rgba(255,255,255,0.8),
+                    inset 0 -2px 5px rgba(0,0,0,0.1);
+      }
+    }
+    
+    .play-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 25px rgba(232, 67, 147, 0.5), 
+                  inset 0 2px 5px rgba(255,255,255,0.8),
+                  inset 0 -2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .play-button.playing {
+      background: linear-gradient(135deg, #ff9ff3, #e84393);
+      color: white;
+    }
+    
+    .music-note {
+      position: absolute;
+      font-size: 20px;
+      opacity: 0;
+      animation: float-note 3s linear infinite;
+    }
+    
+    @keyframes float-note {
+      0% { 
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% { 
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Styled download button */
+    #download-btn {
+      background: linear-gradient(45deg, #000000, #333333);
+      color: #ffffff;
+      border: none;
+      padding: 10px 28px;
+      font-size: 1em;
+      font-weight: 400;
+      cursor: pointer;
+      border-radius: 4px;
+      margin-top: 15px;
+      transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+      display: none;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    #download-btn:hover {
+      background: linear-gradient(45deg, #444444, #666666);
+      transform: scale(1.05);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .camera-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      z-index: 10;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      overflow-y: auto;
+      padding: 20px;
+    }
+    
+    .camera-controls {
+      margin-top: 20px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    video, canvas {
+      max-width: 90%;
+      max-height: 60%;
+      border: 2px solid #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+    }
+
+    .extra-content {
+      margin-top: 40px;
+      padding: 20px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      text-align: left;
+    }
+    
+    .extra-content h3 {
+      color: #e84393;
+      margin-bottom: 15px;
+    }
+    
+    .extra-content p {
+      font-size: 1em;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating dots for decoration -->
+  <div class="dot" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+  <div class="dot" style="top: 40%; right: 15%; animation-delay: 1s;"></div>
+  <div class="dot" style="top: 60%; left: 20%; animation-delay: 2s;"></div>
+  <div class="dot" style="top: 80%; right: 10%; animation-delay: 3s;"></div>
+  <div class="dot" style="top: 30%; left: 80%; animation-delay: 4s;"></div>
+
+  <!-- New floating decorations -->
+  <div class="decoration balloon" style="top: 15%; left: 5%; animation-delay: 0.5s;">🎈</div>
+  <div class="decoration heart" style="top: 25%; right: 8%; animation-delay: 1.5s;">❤️</div>
+  <div class="decoration star" style="top: 50%; left: 15%; animation-delay: 2.5s;">⭐</div>
+  <div class="decoration balloon" style="top: 70%; right: 20%; animation-delay: 3.5s;">🎈</div>
+  <div class="decoration heart" style="top: 85%; left: 70%; animation-delay: 4.5s;">💖</div>
+
+  <!-- Confetti elements -->
+  <div class="confetti" style="left: 10%; animation-delay: 0s;"></div>
+  <div class="confetti" style="left: 20%; animation-delay: 0.5s; background: #74b9ff;"></div>
+  <div class="confetti" style="left: 30%; animation-delay: 1s;"></div>
+  <div class="confetti" style="left: 40%; animation-delay: 1.5s; background: #fdcb6e;"></div>
+  <div class="confetti" style="left: 50%; animation-delay: 2s;"></div>
+  <div class="confetti" style="left: 60%; animation-delay: 2.5s; background: #e17055;"></div>
+  <div class="confetti" style="left: 70%; animation-delay: 3s;"></div>
+  <div class="confetti" style="left: 80%; animation-delay: 3.5s; background: #a29bfe;"></div>
+  <div class="confetti" style="left: 90%; animation-delay: 4s;"></div>
+
+  <div class="card">
+    <div class="icon">🎂</div>
+    <h1>Happy Birthday Ulyafihana</h1>
+    <p>A beautiful wish for a day filled with peace and joy. May this year bring you clarity, elegance, and all the happiness you deserve.</p>
+    <button onclick="revealMessage()">Reveal More</button>
+    <button onclick="openCamera()">Capture Moment</button>
+    
+    <!-- Hidden Message with Quotes and Music -->
+    <div id="hidden-message" class="hidden-message">
+      <div class="quote-container">
+        <div class="quote-icon left">❝</div>
+        <div class="quote-icon right">❞</div>
+        <div class="quote" id="quote-text">"The most beautiful thing you can wear is confidence."</div>
+        <div class="quote-author" id="quote-author">- Blake Lively</div>
+      </div>
+      
+      <div class="music-player">
+        <div class="music-title">For Ulyafihana's Special Day</div>
+        <button class="play-button" id="playButton" onclick="toggleMusic()">
+          ♫
+        </button>
+        <audio id="birthdayMusic" loop>
+          <!-- Replace with your music file path -->
+          <source src="boy pablo - honey.mp3" type="audio/mp3">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+
+    <!-- Photo Result with Enhanced Polaroid Frame -->
+    <div id="photo-result" style="display: none;">
+      <div class="photo-container">
+        <div class="frame-polaroid">
+          <!-- Mini decorations -->
+          <div class="mini-decoration flower">🌼</div>
+          <div class="mini-decoration cactus">🌵</div>
+          <div class="mini-decoration book">📖</div>
+          <div class="mini-decoration flower">🌷</div>
+          
+          <img id="captured-image" class="frame-image" alt="Captured Photo" />
+          <div class="polaroid-text">Happy Birthday Ulyafihana ♥</div>
+        </div>
+      </div>
+      <button id="download-btn" onclick="downloadPhoto()">Download Photo</button>
+    </div>
+
+    <!-- Additional content to make the page scrollable -->
+    <div class="extra-content">
+      <h3>Birthday Wishes</h3>
+      <p>May your day be as bright as your smile and as wonderful as you are. Every moment with you is a treasure, and today we celebrate the amazing person you've become.</p>
+      
+      <h3>Message</h3>
+      <p>I hope your day is peaceful, full of love, and surrounded by people who care about you. You deserve a soft, happy year ahead — the kind that lets you grow, glow, and feel proud of yourself.
+
+You’re genuinely such a sweet person, and I’m grateful for the little moments and conversations we share. I hope you keep being yourself, because that version of you is already wonderful.
+
+Wishing you the happiest birthday ever. </p>
+      
+      <h3>Looking Forward</h3>
+      <p>As you celebrate another year, may you continue to grow, dream, and achieve all that your heart desires. The future holds endless possibilities for someone as special as you.</p>
+    </div>
+  </div>
+
+  <div id="camera-overlay" class="camera-overlay">
+    <video id="video" autoplay></video>
+    <div class="camera-controls">
+      <button onclick="takePhoto()">Take Photo</button>
+      <button onclick="closeCamera()">Close Camera</button>
+    </div>
+  </div>
+
+  <script>
+    let stream;
+    let capturedImageData = null;
+    let currentQuoteIndex = 0;
+    let isMusicPlaying = false;
+    
+    // Array of quotes
+    const quotes = [
+      {
+        text: "The most beautiful thing you can wear is confidence.",
+        author: "Blake Lively"
+      },
+      {
+        text: "You are not just a year older, but a year better, wiser, and more wonderful.",
+        author: "Anonymous"
+      },
+      {
+        text: "May your birthday be as special and radiant as your smile.",
+        author: "Anonymous"
+      },
+      {
+        text: "Age is merely the number of years the world has been enjoying you.",
+        author: "Anonymous"
+      },
+      {
+        text: "Today you are you! That is truer than true! There is no one alive who is you-er than you!",
+        author: "Dr. Seuss"
+      },
+      {
+        text: "The more you praise and celebrate your life, the more there is in life to celebrate.",
+        author: "Oprah Winfrey"
+      },
+      {
+        text: "Your birthday is the first day of another 365-day journey. Be the shining thread in the beautiful tapestry of the world.",
+        author: "Anonymous"
+      },
+      {
+        text: "Don't forget to be happy!!, don't be sad and always smile :).",
+        author: "Anonymous"
+      },
+      {
+        text: "Have a great day on your everyday that you working on!.",
+        author: "Anonymous"
+      }
+    ];
+
+    function revealMessage() {
+      const message = document.getElementById('hidden-message');
+      message.style.display = 'block';
+      
+      // Show a random quote when revealed
+      showRandomQuote();
+    }
+    
+    function showRandomQuote() {
+      // Get a random quote that's different from the current one
+      let newIndex;
+      do {
+        newIndex = Math.floor(Math.random() * quotes.length);
+      } while (newIndex === currentQuoteIndex && quotes.length > 1);
+      
+      currentQuoteIndex = newIndex;
+      
+      const quoteText = document.getElementById('quote-text');
+      const quoteAuthor = document.getElementById('quote-author');
+      
+      // Fade out
+      quoteText.style.opacity = 0;
+      quoteAuthor.style.opacity = 0;
+      
+      // Change content after fade out
+      setTimeout(() => {
+        quoteText.textContent = `"${quotes[currentQuoteIndex].text}"`;
+        quoteAuthor.textContent = `- ${quotes[currentQuoteIndex].author}`;
+        
+        // Fade in
+        quoteText.style.opacity = 1;
+        quoteAuthor.style.opacity = 1;
+      }, 300);
+    }
+    
+    function toggleMusic() {
+      const audio = document.getElementById('birthdayMusic');
+      const playButton = document.getElementById('playButton');
+      
+      if (isMusicPlaying) {
+        audio.pause();
+        playButton.classList.remove('playing');
+        playButton.innerHTML = '♫';
+        stopMusicNotes();
+      } else {
+        audio.play().catch(e => {
+          console.log("Audio play failed:", e);
+          alert("Please add your music file to the audio source to play music.");
+        });
+        playButton.classList.add('playing');
+        playButton.innerHTML = '❚❚';
+        createMusicNotes();
+      }
+      
+      isMusicPlaying = !isMusicPlaying;
+    }
+    
+    function createMusicNotes() {
+      const musicPlayer = document.querySelector('.music-player');
+      
+      // Clear any existing notes
+      document.querySelectorAll('.music-note').forEach(note => note.remove());
+      
+      // Create new music notes
+      for (let i = 0; i < 5; i++) {
+        const note = document.createElement('div');
+        note.className = 'music-note';
+        note.innerHTML = '♪';
+        note.style.left = `${20 + i * 15}%`;
+        note.style.animationDelay = `${i * 0.5}s`;
+        musicPlayer.appendChild(note);
+      }
+    }
+    
+    function stopMusicNotes() {
+      document.querySelectorAll('.music-note').forEach(note => note.remove());
+    }
+
+    async function openCamera() {
+      const overlay = document.getElementById('camera-overlay');
+      const video = document.getElementById('video');
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({ 
+          video: { 
+            facingMode: 'user',
+            width: { ideal: 1280 },
+            height: { ideal: 720 }
+          } 
+        });
+        video.srcObject = stream;
+        overlay.style.display = 'flex';
+      } catch (error) {
+        alert('Camera access denied or not available. Please allow camera permissions.');
+      }
+    }
+
+    function takePhoto() {
+      const video = document.getElementById('video');
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      
+      // Set canvas size to match video
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      
+      // Draw video frame to canvas
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      
+      // Get image data
+      capturedImageData = canvas.toDataURL('image/jpeg');
+
+      // Update photo display
+      const capturedImage = document.getElementById('captured-image');
+      const downloadBtn = document.getElementById('download-btn');
+      const photoResult = document.getElementById('photo-result');
+
+      capturedImage.src = capturedImageData;
+      
+      // Show results
+      photoResult.style.display = 'block';
+      downloadBtn.style.display = 'inline-block';
+
+      closeCamera();
+    }
+
+    function closeCamera() {
+      const overlay = document.getElementById('camera-overlay');
+      overlay.style.display = 'none';
+      if (stream) {
+        stream.getTracks().forEach((track) => track.stop());
+      }
+    }
+
+    function downloadPhoto() {
+      if (!capturedImageData) return;
+
+      // Create a new canvas with frame
+      const originalImg = new Image();
+      originalImg.onload = function() {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Calculate dimensions with frame
+        const framePadding = 60; // Extra space for frame
+        canvas.width = originalImg.width + framePadding * 2;
+        canvas.height = originalImg.height + framePadding * 2 + 50; // Extra space for text
+        
+        // Draw white background for polaroid
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Draw the original image
+        const imgX = framePadding;
+        const imgY = framePadding;
+        const imgWidth = originalImg.width;
+        const imgHeight = originalImg.height;
+        
+        ctx.drawImage(originalImg, imgX, imgY, imgWidth, imgHeight);
+        
+        // Add polaroid frame border
+        ctx.strokeStyle = '#e0e0e0';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(imgX - 1, imgY - 1, imgWidth + 2, imgHeight + 2);
+        
+        // Add polaroid text
+        ctx.font = '18px "Courier New", monospace';
+        ctx.fillStyle = '#666666';
+        ctx.textAlign = 'center';
+        ctx.fillText('Happy Birthday Ulyafihana ♥', canvas.width / 2, imgY + imgHeight + 35);
+        
+        // Add mini decorations
+        ctx.font = '28px Arial';
+        
+        // Top left flower
+        ctx.fillText('🌼', imgX + 20, imgY - 15);
+        
+        // Top right cactus
+        ctx.fillText('🌵', imgX + imgWidth - 25, imgY - 15);
+        
+        // Bottom left book
+        ctx.fillText('📖', imgX + 20, imgY + imgHeight + 15);
+        
+        // Bottom right flower
+        ctx.fillText('🌷', imgX + imgWidth - 25, imgY + imgHeight + 15);
+        
+        // Create download link
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = 'birthday-memory.png';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      };
+      originalImg.src = capturedImageData;
+    }
+    
+    // Add click event to quote container to change quotes
+    document.addEventListener('DOMContentLoaded', function() {
+      const quoteContainer = document.querySelector('.quote-container');
+      if (quoteContainer) {
+        quoteContainer.addEventListener('click', showRandomQuote);
+        quoteContainer.style.cursor = 'pointer';
+        
+        // Add initial tooltip
+        quoteContainer.title = "Click for more quotes!";
+      }
+    });
+  </script>
+</body>
+</html>
